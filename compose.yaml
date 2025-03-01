@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=portfolio_db'
+      - 'POSTGRES_PASSWORD=portfolio'
+      - 'POSTGRES_USER=portfolio'
+    ports:
+      - '5432'
