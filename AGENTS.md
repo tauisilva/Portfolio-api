@@ -129,9 +129,9 @@ To prevent code smells, bugs, security hotspots, and quality gate failures:
 ## 7. Internationalization (i18n)
 
 The API supports multilingual response messages based on the client's `Accept-Language` header:
-1. **English (`en`)** — Default.
-2. **Portuguese (`pt-BR`)**.
-3. **Spanish (`es`)**.
+1. **Portuguese (`pt-BR`)** — **Default / Fallback Locale**.
+2. **English (`en`)** — Secondary Language.
+3. **Spanish (`es`)** — Secondary Language.
 
 ### 7.1. Message Bundles
 - Localized validation messages and error details must be defined in `src/main/resources/i18n/messages_{locale}.properties`.
