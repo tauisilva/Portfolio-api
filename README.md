@@ -1,15 +1,15 @@
-# 🌐 Portfolio API
+# 🌐 Portfolio API (Quarkus 3 Cloud-Native)
 
 <div align="center">
 
-![Java](https://img.shields.io/badge/Java_23-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot_3.4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![Java](https://img.shields.io/badge/Java_21%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Quarkus](https://img.shields.io/badge/Quarkus_3.39-4695EB?style=for-the-badge&logo=quarkus&logoColor=white)
+![Panache](https://img.shields.io/badge/Hibernate_Panache-59666C?style=for-the-badge&logo=hibernate&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Flyway](https://img.shields.io/badge/Flyway-CC0202?style=for-the-badge&logo=flyway&logoColor=white)
-![Swagger](https://img.shields.io/badge/OpenAPI_Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
+![Swagger UI](https://img.shields.io/badge/Swagger_UI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
 
-API RESTful corporativa desenvolvida para prover dados dinâmicos, métricas de projetos e serviços integrados ao ecossistema do meu portfólio profissional.
+API RESTful reativa de altíssima performance desenvolvida em **Quarkus 3 (Supersonic Subatomic Java)**, projetada para servir dados dinâmicos, projetos e métricas com boot sub-segundo e baixo consumo de memória.
 
 </div>
 
@@ -17,7 +17,7 @@ API RESTful corporativa desenvolvida para prover dados dinâmicos, métricas de 
 
 ## 🔗 Frontend Web (Aplicação Consumidora)
 
-Esta API foi projetada para alimentar a interface gráfica do portfólio profissional:
+Esta API alimenta a interface web do portfólio profissional:
 
 👉 **[Portfolio-app — Repositório do Frontend (Angular 19)](https://github.com/tauisilva/Portfolio-app)**
 
@@ -25,15 +25,15 @@ Esta API foi projetada para alimentar a interface gráfica do portfólio profiss
 
 ## 🛠️ Tecnologias & Arquitetura
 
-- **Linguagem:** Java 23
-- **Framework:** Spring Boot 3.4.3
-- **Persistência:** Spring Data JPA / Hibernate
-- **Banco de Dados:** PostgreSQL 16
-- **Database Migrations:** Flyway
-- **Segurança:** Spring Security
-- **Documentação:** Springdoc OpenAPI / Swagger UI
-- **Containerização:** Docker & Docker Compose
-- **Build Tool:** Maven
+- **Runtime:** Quarkus 3.39.2 (Supersonic Subatomic Java)
+- **Linguagem:** Java 21+
+- **REST Engine:** Quarkus REST (Reativo e não-bloqueante) + Jackson
+- **Persistência:** Hibernate ORM com Panache
+- **Documentação & OpenAPI:** SmallRye OpenAPI + Swagger UI nativo com tema Dark
+- **Observabilidade:** SmallRye Health (`/q/health`)
+- **Compilação Nativa:** Preparado para GraalVM / Mandrel (Native Executable)
+- **Containerização:** Docker (JVM e Native Image)
+- **Build Tool:** Apache Maven 3.9
 
 ---
 
@@ -41,8 +41,8 @@ Esta API foi projetada para alimentar a interface gráfica do portfólio profiss
 
 ### Pré-requisitos
 
-- [JDK 23](https://adoptium.net/) instalado
-- [Docker & Docker Compose](https://www.docker.com/) instalados
+- [JDK 21+](https://adoptium.net/) instalado
+- [Docker & Docker Compose](https://www.docker.com/) (opcional para Dev Services)
 
 ### 1. Clonar o repositório
 
@@ -51,28 +51,46 @@ git clone https://github.com/tauisilva/Portfolio-api.git
 cd Portfolio-api
 ```
 
-### 2. Subir o Banco de Dados com Docker
+### 2. Executar em Modo de Desenvolvimento (Live Coding)
+
+O Quarkus possui o revolucionário **Live Reload**: qualquer alteração no código é refletida instantaneamente sem reiniciar a JVM.
 
 ```bash
-docker compose up -d
+# Linux / macOS
+./mvnw quarkus:dev
+
+# Windows (PowerShell)
+.\mvnw quarkus:dev
 ```
 
-### 3. Executar a Aplicação
+A API estará disponível em: `http://localhost:8080`
+
+### 3. Executar o Pacote Compilado (JVM)
 
 ```bash
-# Linux/macOS
-./mvnw spring-boot:run
-
-# Windows
-mvnw.cmd spring-boot:run
+.\mvnw clean package -DskipTests
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
 ---
 
-## 📖 Documentação da API (Swagger)
+## 📖 Documentação da API (Swagger UI) & Health
 
-Com a aplicação em execução, acesse a interface interativa do Swagger UI em:
-👉 **[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)**
+Com a aplicação em execução:
+- **Swagger UI Interativo:** 👉 **[http://localhost:8080/q/swagger-ui/](http://localhost:8080/q/swagger-ui/)**
+- **OpenAPI Schema (JSON):** `http://localhost:8080/q/openapi`
+- **Health Checks (Liveness/Readiness):** `http://localhost:8080/q/health`
+
+---
+
+## ⚡ Endpoints Principais
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| `GET` | `/api/projects` | Lista todos os projetos do portfólio |
+| `GET` | `/api/projects/featured` | Lista apenas projetos em destaque |
+| `GET` | `/api/projects/{id}` | Retorna detalhes de um projeto específico |
+| `GET` | `/q/health` | Status de saúde da aplicação |
 
 ---
 
